@@ -2,15 +2,9 @@
 const accordion = (triggersSelector) => {
     const btns = document.querySelectorAll(triggersSelector);
 
-    btns.forEach((btn) => {
+    btns.forEach((btn, i) => {
         btn.addEventListener('click', function() {
-            
-            btns.forEach(btn => {
-                btn.classList.remove('active-style');
-                btn.nextElementSibling.classList.remove('active-content');
-                btn.nextElementSibling.style.maxHeight = '0px';
-            });
-
+            hideContent(i);
             this.classList.toggle('active-style');
             this.nextElementSibling.classList.toggle('active-content');
 
@@ -21,6 +15,17 @@ const accordion = (triggersSelector) => {
             }
         });
     });
+
+    
+    const hideContent = (n) => {
+        btns.forEach((btn, i) => {
+            if (i !== n) {
+                btn.classList.remove('active-style');
+                btn.nextElementSibling.classList.remove('active-content');
+                btn.nextElementSibling.style.maxHeight = '0px';
+            }
+        });
+    };
 
     //       blocks = document.querySelectorAll(itemsSelector);
 
