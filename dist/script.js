@@ -4457,9 +4457,13 @@ __webpack_require__.r(__webpack_exports__);
 // const accordion = (triggersSelector, itemsSelector) => {
 var accordion = function accordion(triggersSelector) {
   var btns = document.querySelectorAll(triggersSelector);
-  btns.forEach(function (btn, i) {
+  btns.forEach(function (btn) {
     btn.addEventListener('click', function () {
-      hideContent(i);
+      btns.forEach(function (btn) {
+        btn.classList.remove('active-style');
+        btn.nextElementSibling.classList.remove('active-content');
+        btn.nextElementSibling.style.maxHeight = '0px';
+      });
       this.classList.toggle('active-style');
       this.nextElementSibling.classList.toggle('active-content');
 
@@ -4469,17 +4473,7 @@ var accordion = function accordion(triggersSelector) {
         this.nextElementSibling.style.maxHeight = '0px';
       }
     });
-  });
-
-  var hideContent = function hideContent(n) {
-    btns.forEach(function (btn, i) {
-      if (i !== n) {
-        btn.classList.remove('active-style');
-        btn.nextElementSibling.classList.remove('active-content');
-        btn.nextElementSibling.style.maxHeight = '0px';
-      }
-    });
-  }; //       blocks = document.querySelectorAll(itemsSelector);
+  }); //       blocks = document.querySelectorAll(itemsSelector);
   // blocks.forEach(item => {
   //     item.classList.add('animated', 'fadeInDown');
   // });
@@ -4493,7 +4487,6 @@ var accordion = function accordion(triggersSelector) {
   //         }
   //     });
   // });
-
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (accordion);
